@@ -14,6 +14,8 @@ def main():
 
     # Algorithm to go through nouns and verbs to relate them
 
+    # Filter results using hapaxes
+
     pass
 
 
