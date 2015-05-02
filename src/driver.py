@@ -22,9 +22,16 @@ def main():
     tokens = nltk.word_tokenize(raw_text)
 
     # Normalize tokenize text (lowercase)
+    words = [w.lower() for w in tokens if w.isalpha()]
+
+    # mark words with POS tags
+    tagged_words = nltk.pos_tag(words)
 
     # Gather nouns => Stem nouns
+    nouns = [w for w in tagged_words if w[1].startswith('N')] 
+
     # Gather verbs =>
+    verbs = [w for w in tagged_words if w[1].startswith('V')]
 
     # Algorithm to go through nouns and verbs to relate them
 
