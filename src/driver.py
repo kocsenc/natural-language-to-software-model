@@ -2,6 +2,7 @@
 __author__ = 'David Kisluk'
 
 import argparse
+import nltk
 
 def main():
     # parse args
@@ -14,7 +15,11 @@ def main():
     output_file = args.outfile
     
     # In comes the text (filename)
+    f = open(input_file)
+    raw_text = f.read()
+
     # Use nltk to tokenize text.
+    tokens = nltk.word_tokenize(raw_text)
 
     # Normalize tokenize text (lowercase)
 
