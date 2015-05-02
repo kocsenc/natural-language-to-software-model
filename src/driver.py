@@ -1,25 +1,18 @@
 #!usr/bin/env python3
+__author__ = 'David Kisluk'
 
-import sys, getopt
+import argparse
 
-def main(argv):
+def main():
     # parse args
     input_file = ''
     output_file = ''
-    try:
-        opts, args = getopt.getopt(argv,"hi:o:",["ifile=","ofile="])
-    except getopt.GetoptError:
-        print_help()
-        sys.exit(2)
-    for opt, arg in opts:
-        if opt == '-h':
-            print_help()
-            sys.exit()
-        elif opt in ("-i", "--ifile"):
-            input_file = arg
-        elif opt in ("-o", "--ofile"):
-            output_file = arg
 
+    args = parse_args()
+        
+    input_file = args.infile
+    output_file = args.outfile
+    
     # In comes the text (filename)
     # Use nltk to tokenize text.
 
@@ -33,10 +26,21 @@ def main(argv):
     # Filter results using hapaxes
 
     pass
+    
+def parse_args():
+    """Parses command line arguments and returns a collection of them"""
 
-def print_help():
-    print('driver.py -i <inputfile> -o <outputfile>')
+    parser = argparse.ArgumentParser()
+
+    format_group = parser.add_mutually_exclusive_group()
+    format_group.add_argument("-j", "--json", action="store_true")
+    format_group.add_argument("-x", "--xml", action="store_true")
+
+    parser.add_argument("infile", help="the input file")
+    parser.add_argument("outfile", help="the output file")
+
+    return parser.parse_args()
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    main()
 
