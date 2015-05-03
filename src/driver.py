@@ -37,7 +37,6 @@ def main():
 
     # Filter results using hapaxes
 
-    pass
 
 def parse_args():
     """Parses command line arguments and returns a collection of them"""
