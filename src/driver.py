@@ -10,13 +10,13 @@ def main():
     output_file = ''
 
     args = parse_args()
-        
+
     input_file = args.infile
     output_file = args.outfile
-    
+
     # In comes the text (filename)
-    f = open(input_file)
-    raw_text = f.read()
+    with open(input_file, 'r') as f:
+        raw_text = f.read()
 
     # Use nltk to tokenize text.
     tokens = nltk.word_tokenize(raw_text)
@@ -28,7 +28,7 @@ def main():
     tagged_words = nltk.pos_tag(words)
 
     # Gather nouns => Stem nouns
-    nouns = [w for w in tagged_words if w[1].startswith('N')] 
+    nouns = [w for w in tagged_words if w[1].startswith('N')]
 
     # Gather verbs =>
     verbs = [w for w in tagged_words if w[1].startswith('V')]
@@ -38,7 +38,7 @@ def main():
     # Filter results using hapaxes
 
     pass
-    
+
 def parse_args():
     """Parses command line arguments and returns a collection of them"""
 
