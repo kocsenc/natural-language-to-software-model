@@ -7,4 +7,4 @@ class ModelClass():
     """
     def __init__(self):
         self.attributes = []
-        self.behaviours = []
+        self.behaviors = []

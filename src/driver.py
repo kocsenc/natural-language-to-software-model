@@ -3,7 +3,13 @@ __author__ = 'David Kisluk'
 
 import argparse
 import json
+from json import JSONEncoder
 import nltk
+from ModelClass import ModelClass
+
+class ModelEncoder(JSONEncoder):
+    def default(self, o):
+        return o.__dict__
 
 def main():
     # parse args
@@ -39,13 +45,17 @@ def main():
     verbs_freq_dist = nltk.FreqDist(untagged_verbs)
 
     # Algorithm to go through nouns and verbs to relate them
+    model = ModelClass()
+    for noun in noun_freq_dist.hapaxes():
+        model.attributes.append(noun)
+    for verb in verbs_freq_dist.hapaxes():
+        model.behaviors.append(verb)
 
     # Filter results using hapaxes
-    out_array = [noun_freq_dist.hapaxes(), verbs_freq_dist.hapaxes()]
 
     # write the verbs/nouns to a JSON file
     with open(output_file, 'w') as json_file:
-        json.dump(out_array, json_file)
+        json.dump(model, json_file, cls=ModelEncoder)
 
 def parse_args():
     """Parses command line arguments and returns a collection of them"""
