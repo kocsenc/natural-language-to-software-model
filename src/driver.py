@@ -2,6 +2,7 @@
 __author__ = 'David Kisluk'
 
 import argparse
+import json
 import nltk
 
 def main():
@@ -29,9 +30,13 @@ def main():
 
     # Gather nouns => Stem nouns
     nouns = [w for w in tagged_words if w[1].startswith('N')] 
+    untagged_nouns = nltk.Text([noun[0] for noun in nouns])
+    noun_freq_dist = nltk.FreqDist(untagged_nouns)
 
     # Gather verbs =>
     verbs = [w for w in tagged_words if w[1].startswith('V')]
+    untagged_verbs = nltk.Text([verb[0] for verb in verbs])
+    verbs_freq_dist = nltk.FreqDist(untagged_verbs)
 
     # Algorithm to go through nouns and verbs to relate them
 
