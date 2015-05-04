@@ -45,13 +45,13 @@ def main():
     verbs_freq_dist = nltk.FreqDist(untagged_verbs)
 
     # Algorithm to go through nouns and verbs to relate them
-    model = ModelClass()
-    for noun in noun_freq_dist.hapaxes():
-        model.attributes.append(noun)
-    for verb in verbs_freq_dist.hapaxes():
-        model.behaviors.append(verb)
-
+    
     # Filter results using hapaxes
+    model = ModelClass()
+        for noun in noun_freq_dist.hapaxes():
+            model.attributes.append(noun)
+        for verb in verbs_freq_dist.hapaxes():
+            model.behaviors.append(verb)
 
     # write the verbs/nouns to a JSON file
     with open(output_file, 'w') as json_file:
