@@ -35,7 +35,7 @@ def main():
     tagged_words = nltk.pos_tag(words)
 
     # Gather nouns => Stem nouns
-    nouns = [w for w in tagged_words if w[1].startswith('N')] 
+    nouns = [w for w in tagged_words if w[1].startswith('N')]
     untagged_nouns = nltk.Text([noun[0] for noun in nouns])
     noun_freq_dist = nltk.FreqDist(untagged_nouns)
 
@@ -45,13 +45,13 @@ def main():
     verbs_freq_dist = nltk.FreqDist(untagged_verbs)
 
     # Algorithm to go through nouns and verbs to relate them
-    
+
     # Filter results using hapaxes
     model = ModelClass()
-        for noun in noun_freq_dist.hapaxes():
-            model.attributes.append(noun)
-        for verb in verbs_freq_dist.hapaxes():
-            model.behaviors.append(verb)
+    for noun in noun_freq_dist.hapaxes():
+        model.attributes.append(noun)
+    for verb in verbs_freq_dist.hapaxes():
+        model.behaviors.append(verb)
 
     # write the verbs/nouns to a JSON file
     with open(output_file, 'w') as json_file:
