@@ -41,7 +41,11 @@ def main():
     # Algorithm to go through nouns and verbs to relate them
 
     # Filter results using hapaxes
+    out_array = [noun_freq_dist.hapaxes(), verbs_freq_dist.hapaxes()]
 
+    # write the verbs/nouns to a JSON file
+    with open(output_file, 'w') as json_file:
+        json.dump(out_array, json_file)
 
 def parse_args():
     """Parses command line arguments and returns a collection of them"""
